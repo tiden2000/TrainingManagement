@@ -10,137 +10,107 @@ using TrainingManagement.Models;
 
 namespace TrainingManagement.Controllers
 {
-    public class TrainersController : Controller
+    public class CourseCategoriesController : Controller
     {
-        private TrainerDbContext db = new TrainerDbContext();
+        private TraineeDbContext db = new TraineeDbContext();
 
-        public ActionResult Login() {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(Trainer objUser) {
-            if (ModelState.IsValid) {
-                using (TrainerDbContext db = new TrainerDbContext()) {
-                    var obj = db.Trainers.Where(a => a.TrainerUsername.Equals(objUser.TrainerUsername) && a.TrainerPassword.Equals(objUser.TrainerPassword)).FirstOrDefault();
-                    if (obj != null) {
-                        Session["TrainerId"] = obj.TrainerId.ToString();
-                        Session["TrainerUsername"] = obj.TrainerUsername.ToString();
-                        return RedirectToAction("Menu");
-                    }
-                }
-            }
-            return View(objUser);
-        }
-
-
-        public ActionResult Menu() {
-            if (Session["TrainerId"] != null) {
-                return View();
-            }
-            else {
-                return RedirectToAction("Login");
-            }
-        }
-
-        // GET: Trainers
+        // GET: CourseCategories
         public ActionResult Index()
         {
-            return View(db.Trainers.ToList());
+            return View(db.CourseCategories.ToList());
         }
 
-        // GET: Trainers/Details/5
+        // GET: CourseCategories/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trainer trainer = db.Trainers.Find(id);
-            if (trainer == null)
+            CourseCategory courseCategory = db.CourseCategories.Find(id);
+            if (courseCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(trainer);
+            return View(courseCategory);
         }
 
-        // GET: Trainers/Create
+        // GET: CourseCategories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Trainers/Create
+        // POST: CourseCategories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TrainerId,TrainerUsername,TrainerPassword,TrainerName,TrainerWorkplace,TrainerEmail")] Trainer trainer)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] CourseCategory courseCategory)
         {
             if (ModelState.IsValid)
             {
-                db.Trainers.Add(trainer);
+                db.CourseCategories.Add(courseCategory);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(trainer);
+            return View(courseCategory);
         }
 
-        // GET: Trainers/Edit/5
+        // GET: CourseCategories/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trainer trainer = db.Trainers.Find(id);
-            if (trainer == null)
+            CourseCategory courseCategory = db.CourseCategories.Find(id);
+            if (courseCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(trainer);
+            return View(courseCategory);
         }
 
-        // POST: Trainers/Edit/5
+        // POST: CourseCategories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TrainerId,TrainerUsername,TrainerPassword,TrainerName,TrainerWorkplace,TrainerEmail")] Trainer trainer)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] CourseCategory courseCategory)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(trainer).State = EntityState.Modified;
+                db.Entry(courseCategory).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(trainer);
+            return View(courseCategory);
         }
 
-        // GET: Trainers/Delete/5
+        // GET: CourseCategories/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trainer trainer = db.Trainers.Find(id);
-            if (trainer == null)
+            CourseCategory courseCategory = db.CourseCategories.Find(id);
+            if (courseCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(trainer);
+            return View(courseCategory);
         }
 
-        // POST: Trainers/Delete/5
+        // POST: CourseCategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Trainer trainer = db.Trainers.Find(id);
-            db.Trainers.Remove(trainer);
+            CourseCategory courseCategory = db.CourseCategories.Find(id);
+            db.CourseCategories.Remove(courseCategory);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

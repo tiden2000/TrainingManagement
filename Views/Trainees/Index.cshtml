@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TrainingManagement.Models.Trainee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Trainee accounts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+
+    @using (Html.BeginForm("Index","Trainees", FormMethod.Get)) {
+    <p>
+        Trainee Username: @Html.TextBox("SearchString")<br />
+        <input type="submit" value="Search" />
+    </p>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TraineeUsername)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TraineePassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TraineeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TraineeLanguage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TraineeDepartment)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TraineeUsername)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TraineePassword)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TraineeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TraineeLanguage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TraineeDepartment)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TraineeId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.TraineeId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TraineeId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div>
+        @Html.ActionLink("Back to staff menu", "Menu", "Staffs")
+    </div>
+

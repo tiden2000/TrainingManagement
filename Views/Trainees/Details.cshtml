@@ -1,0 +1,58 @@
+﻿@model TrainingManagement.Models.Trainee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Trainee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TraineeUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineeUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TraineePassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineePassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TraineeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TraineeLanguage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineeLanguage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TraineeDepartment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineeDepartment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TraineeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
