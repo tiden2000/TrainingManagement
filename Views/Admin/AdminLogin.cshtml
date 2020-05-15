@@ -1,0 +1,34 @@
+﻿@model TrainingManagement.AdminTb
+
+@{
+    ViewBag.Title = "AdminLogin";
+}
+
+<h2>AdminLogin</h2>
+
+@using (Html.BeginForm("AdminLogin", "Admin", FormMethod.Post)) {  // Generate html form
+    <fieldset>
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null) {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table>
+            <tr>
+                <td>@Html.LabelFor(a => a.Id)</td>
+                <td>@Html.TextBoxFor(a => a.Id)</td>
+                <td>@Html.ValidationMessageFor(a => a.Id)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}

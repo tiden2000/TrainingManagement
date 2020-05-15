@@ -1,0 +1,45 @@
+﻿@model TrainingManagement.Models.Trainer
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "Trainers", FormMethod.Post)) {
+    <fieldset>
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null) {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table>
+            <tr>
+                <td>@Html.LabelFor(a => a.TrainerUsername)</td>
+                <td>@Html.TextBoxFor(a => a.TrainerUsername)</td>
+                <td>@Html.ValidationMessageFor(a => a.TrainerUsername)</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.TrainerPassword)
+                </td>
+                <td>
+                    @Html.PasswordFor(a => a.TrainerPassword)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.TrainerPassword)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}  

@@ -1,0 +1,13 @@
+﻿@model TrainingManagement.Models.Staff
+
+@{
+    ViewBag.Title = "Menu";
+}
+
+<h2>Staff Menu</h2>
+
+<div>
+    @Html.ActionLink("Manage trainers", "index", "Trainers")
+    @Html.ActionLink("Manage trainees", "index", "Staffs")
+</div>
+
